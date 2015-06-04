@@ -1,0 +1,10 @@
+web:
+  build: .
+  links:
+    - mongo
+  volumes:
+    - .:/usr/src/myapp
+  ports:
+    - "8808:8080"
+mongo:
+  image: mongo
