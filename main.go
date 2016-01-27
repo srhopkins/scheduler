@@ -8,9 +8,9 @@ import (
 )
 
 func main() {
-	logStore, err := raftboltdb.NewBoltStore(filepath.Join("./", "raft.db"))
+	logStore, err := raftboltdb.NewBoltStore(filepath.Join("/data", "raft.db"))
 	if err != nil {
-		fmt.Errorf("new bolt store: %s", err)
+		fmt.Printf("new bolt store: %s", err)
 	}
 
 	fmt.Println(logStore)

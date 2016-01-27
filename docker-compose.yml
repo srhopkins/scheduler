@@ -1,10 +1,20 @@
-web:
-  build: .
-  links:
-    - mongo
+builddata:
+  image: golang:1.5-wheezy
   volumes:
-    - .:/usr/src/myapp
-  ports:
-    - "8808:8080"
-mongo:
-  image: mongo
+    - /go/src
+    - /data
+
+build:
+  image: golang:1.5-wheezy
+  volumes_from: 
+    - builddata
+  volumes: 
+    - ./:/go/src/github.com/scheduler/scheduler
+  working_dir: /go/src/github.com/scheduler/scheduler
+  entrypoint: /usr/local/go/bin/go
+  command: get
+
+sched:
+  image: golang:1.5-wheezy
+  volumes_from:
+    - builddata  
